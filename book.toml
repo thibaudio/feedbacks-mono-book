@@ -1,0 +1,6 @@
+[book]
+authors = ["Thibaud"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Feedbacks Documentation"
