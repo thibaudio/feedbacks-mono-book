@@ -2,15 +2,19 @@
 
 ## Application permission
 {{name}} only need a restricted set of permissions to operate:
-- read permissions in all channels where you want to receive feedback (frontend channels)
-- read, write and upload file permissions in the channel dedicated to receiving feedback (backend channel)
+  - View Channels
+  - Send Messages
+  - Attach Files
+  - Read Message History
 
 ## Data Collection
-{{name}} only collects the minimum amount of data it needs to function properly:
-- Discord identifiers for:
-  - server
+To function properly, {{name}} stores Discord identifiers for:
+  - servers
+  - server's owners
   - backend channel
   - frontend channels
 
+If Steam integration is enable for a game, {{name}} will also store its **Steam AppId**.
+
 ## Third Parties
-No Third parties are utilized by the bot
+When you are using the Steam Integration, {{name}} is using Steam API to validate user identity and game ownership. Users SteamIds are not stored.

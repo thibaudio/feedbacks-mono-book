@@ -1,4 +1,4 @@
 # Summary
 
-- [Chapter 1](./chapter_1.md)
-- [Privacy](./privacy.md)
+- [Getting Started](./getting_started.md)
+- [Privacy Policy](./privacy.md)

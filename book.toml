@@ -3,7 +3,8 @@ authors = ["Thibaud"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Feedbacks Documentation"
+title = "BugBee"
 
 [preprocessor.variables.variables]
-name = "Feedbacks"
+name = "BugBee"
+discord = "[discord](https://discord.gg/AQFX5fYbxd)"
