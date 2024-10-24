@@ -31,8 +31,8 @@ jobs:
           curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
           rustup update
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-          cargo binstall --version ${MDBOOK_VERSION} mdbook
-          cargo binstall --version ${MDBOOK_VARIABLES_VERSION} mdbook-variables
+          cargo binstall -y --version ${MDBOOK_VERSION} mdbook
+          cargo binstall -y --version ${MDBOOK_VARIABLES_VERSION} mdbook-variables
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
