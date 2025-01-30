@@ -3,22 +3,18 @@
 ## Add BugBee to your server
 1. Click on the following link to add {{name}} to your game or company discord:  
 [Invite BugBee to your server](https://discord.com/oauth2/authorize?client_id=1150747928885989376)
-
-2. Create a private channel, we'll call it the **Backend Channel**, and give access to people reviewing the feedbacks as well as {{name}}
+2. Create a private channel, we'll call it the **Backend Channel**, and give access to people reviewing user reports as well as {{name}}
 3. Initialize {{name}} by typing `/init` in the **Backend Channel**
-4. For each games you want to receive feedbacks on, create a dedicated **Frontend Channel**, and register it by typing: `/add_game <your game name>`
-5. To enable Steam Integration for your game, type the following command in your game's **Frontend Channel**: `/add_steam <game_steam_appid>`
 
-## Removing a Frontend Channel
-If you want to remove a Frontend Channel, you can do so by typing `/unregister_game_channel` in the target channel.
+## Add a Frontend Channel for a game
+To register a channel where users can report feedback and bugs, create a dedicated **Frontend Channel**, and register it by typing: `/add_game <your game name>`
 
-## Moving Backend Channel
-To identify a channel, {{name}} is using the discord channel id, it means you can move or rename your channels without incidence.
-If you do want to register a new Backend Channel though, you can remove the bot completely and re-configure both your Backend Channel and your Frontend Channels.
+## Add an Endpoint integration
+To enable in-game reporting, you need to add an endpoint integration.
+Go to the dedicated **Frontend Channel** for your game, then type `/add_endpoint_integration <shared_code>`, where the `shared_code` is a string of your choosing.
+The bot will reply with your game's id. Note down your `shared_code` and your `game_id` for later.
 
-## Removing BugBee
-To remove BugBee and have the bot forget everything about your server, you can run the following command: `/remove_bugbee`.
-When the command is successful, you can remove {{name}} user from your server.
+You can now send report from you game to Bugbee's api. Please refer to the [API Reference](api_reference.md) for more details.
 
 ## How can I get some support
 Join us on {{discord}} to get support, leave a feedback, report a bug, or ask for a new feature!
