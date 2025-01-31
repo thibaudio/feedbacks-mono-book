@@ -1,3 +1,10 @@
+## 0.2.3 (2025-01-31)
+
+### Fix
+
+- fix auto deploy
+- add attachment size limit
+
 ## 0.2.2 (2025-01-31)
 
 ### Fix
