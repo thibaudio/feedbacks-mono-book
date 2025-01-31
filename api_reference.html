@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>API Reference - BugBee</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="getting_started.html"><strong aria-hidden="true">2.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="bot_reference.html"><strong aria-hidden="true">3.</strong> Bot Reference</a></li><li class="chapter-item expanded "><a href="api_reference.html" class="active"><strong aria-hidden="true">4.</strong> API Reference</a></li><li class="chapter-item expanded "><a href="privacy.html"><strong aria-hidden="true">5.</strong> Privacy Policy</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">BugBee</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h1>
+<h2 id="post-httpsapibugbeeappv1report"><a class="header" href="#post-httpsapibugbeeappv1report">POST https://api.bugbee.app/v1/report</a></h2>
+<p>Create a report for game, with an optional attachment.</p>
+<h3 id="header"><a class="header" href="#header">Header</a></h3>
+<p>Content-Type: multipart/form-data; boudary=&lt;boundary word&gt;<br />
+Content-Length: &lt;size of the body&gt; </p>
+<h3 id="body"><a class="header" href="#body">Body</a></h3>
+<h4 id="game_id---string---required"><a class="header" href="#game_id---string---required">game_id - string - Required</a></h4>
+<p>Game ID returned by the <code>/add_endpoint_integration</code> command.</p>
+<h4 id="endpoint_secret---string---required"><a class="header" href="#endpoint_secret---string---required">endpoint_secret - string - Required</a></h4>
+<p>The <code>shared_code</code> used when register a channel with the <code>/add_endpoint_integration</code> command.</p>
+<h4 id="description---string---required"><a class="header" href="#description---string---required">description - string - Required</a></h4>
+<p>The content of the report written by the user.</p>
+<h4 id="report_type---string---required"><a class="header" href="#report_type---string---required">report_type - string - Required</a></h4>
+<p>The type of report that is being created, can be Feedback or Bug.</p>
+<h4 id="attachment---bytes---optional"><a class="header" href="#attachment---bytes---optional">attachment - bytes - Optional</a></h4>
+<p>Needed if attachment_filename is set.<br />
+The binary array containing the raw data of the file to upload, up to 10MB.</p>
+<h4 id="attachment_filename---bytes---optional"><a class="header" href="#attachment_filename---bytes---optional">attachment_filename - bytes - Optional</a></h4>
+<p>Needed if attachment is set.<br />
+The name of the file uploaded in the attachment field.</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>A simple Godot Example: </p>
+<pre><code class="language-GDScript">func send_feedback_multipart(game_id: String, endpoint_secret: String, text: String, report_type: String, image: Image) -&gt; void:
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+
+	var body = PackedByteArray()
+	body.append_array(&quot;--boundary&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\nContent-Disposition: form-data; name=\&quot;attachment\&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;Content-Type: image/png\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(image.save_png_to_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;--boundary&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\nContent-Disposition: form-data; name=\&quot;game_id\&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(game_id.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;--boundary&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\nContent-Disposition: form-data; name=\&quot;endpoint_secret\&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(endpoint_secret.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;--boundary&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\nContent-Disposition: form-data; name=\&quot;description\&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(text.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;--boundary&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\nContent-Disposition: form-data; name=\&quot;report_type\&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(report_type.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;--boundary&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\nContent-Disposition: form-data; name=\&quot;attachment_filename\&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;screenshot-{0}.png&quot;.format([Time.get_datetime_string_from_system()]).to_utf8_buffer())
+	body.append_array(&quot;\r\n&quot;.to_utf8_buffer())
+	body.append_array(&quot;--boundary--&quot;.to_utf8_buffer())
+	
+	var headers = [
+		&quot;Content-Length: &quot; + str(body.size()),
+		&quot;Content-Type: multipart/form-data; boundary=boundary&quot;
+		]
+	
+	http_request.request_raw(&quot;https://api.bugbee.app/v1/report&quot;, headers, HTTPClient.METHOD_POST, body)
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="bot_reference.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="privacy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="bot_reference.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="privacy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
