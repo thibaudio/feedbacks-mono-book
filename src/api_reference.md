@@ -18,7 +18,7 @@ The content of the report written by the user.
 The type of report that is being created, can be Feedback or Bug.
 #### attachment - bytes - Optional
 Needed if attachment_filename is set.
-The binary array containing the raw data of the file to upload.
+The binary array containing the raw data of the file to upload, up to 10MB.
 #### attachment_filename - bytes - Optional
 Needed if attachment is set.  
 The name of the file uploaded in the attachment field.
